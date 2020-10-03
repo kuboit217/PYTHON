@@ -113,5 +113,7 @@ Câu lệnh này liên quan đến phương thức __enter__ và __exit__ của 
 with open("file.txt") as file_obj:
     data = file_obj.readlines()
 print(data)
-    
+file_obj.close()
+
+#hết file
 
