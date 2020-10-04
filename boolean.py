@@ -60,3 +60,4 @@ Việc kiểm tra giá trị Boolean đó là False hay là True hơi phức t�
 #1 là True, 0 là False
 
 #Syntaxnic sugar cho việc so sánh trong Python
+'''Bạn đôi lúc phải kiểm tra những trường hợp như kiểu tra một số n có nằm trong khoảng (a; b), đoạn [a; b], nửa khoảng (a; b], nửa khoảng [a; b) hay không? hoặc là kiểm tra xem một số k có bằng một trong những số như x, y hoặc z hay không. Đương nhiên, những lần làm như vậy cũng làm bạn hơi cực'''
