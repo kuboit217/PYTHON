@@ -55,6 +55,7 @@ for key, value in dic_.items():
 print("Câu lệnh break, continue")
 '''Những câu lệnh này có chức năng hoàn toàn tương tự như trong vòng lặp while.
 Ví dụ về câu lệnh break trong vòng lặp for'''
+print("break")
 ch = "Việt Đinh"
 for i in ch:
     if i ==" ":
@@ -62,6 +63,7 @@ for i in ch:
     else:
         print(i)
 #chỉ in được việt do có khoảng trống sẽ thoát ra vòng lặp
+print("continue")
 ch = "Việt Đinh"
 for i in ch:
     if i ==" ":
@@ -91,3 +93,78 @@ for i in (1,3,4):
     if i % 2 == 0:
         break
     else: print(i)
+
+#Kiểu dữ liệu range (dãy số)
+print("Kiểu dữ liệu range (dãy số)")
+#range(stop)
+#Với cách này, ta sẽ tạo một dãy số bắt đầu bằng số 0 và kết thúc là stop – 1.
+#  Dãy số này là một cấp số cộng với công sai là 1.
+k = range(3)
+print(type(k))
+print(k[0], k[1], k[-1])
+
+#range(start, stop[, step])
+#Với cú pháp này, ta sẽ tạo một dãy số bắt đầu bằng start và kết thúc là stop – 1. 
+# Dãy số này là một cấp số cộng với công sai là 1.
+#Trong trường hợp step (buộc phải khác 0) được đưa vào thì công sai sẽ là step.
+print(list(range(2,5)))
+print(list(range(5,1,-1)))
+
+#Sử dụng range để duyệt một List, Tuple, Chuỗi
+print("Sử dụng range để duyệt một List, Tuple, Chuỗi")
+#Chúng ta sử dụng một dãy số để dùng indexing lấy các giá trị trong một List, Tuple hoặc Chuỗi.
+#Chúng ta có hàm range sinh ra một dãy số.
+s = 'Việt Đinh'
+lst = [s,(1,2,3),{'abc','xyz'}]
+for i in range(len(lst)):
+    print(lst[i])
+
+#Sự khác nhau giữa sequence scan và indexing scan
+print("Sự khác nhau giữa sequence scan và indexing scan")
+'''Trong bài trước, bạn thấy rằng ta không cần dùng tới hàm range vẫn có thể duyệt hết 
+các phần tử của một List. Vậy điều gì khiến chúng ta đôi lúc phải dùng tới hàm range để xử 
+lí một List?
+Đó là khi ta cần update (cập nhật) List. Hãy xem hai ví dụ sau đây:
+Đầu tiên là sequence scan'''
+print("sequence scan")
+lst = [1,2,3]
+for i in lst:
+    i += 1
+print(lst)
+
+#indexing scan
+print("indexing scan")
+lst = [1,2,3]
+for i in range(len(lst)):
+    lst[i] += 1
+print(lst)
+
+#Comprehension
+print("Comprehension")
+#output-expression for-statement optional-predicate ]
+print(['--'.join((a.capitalize(), b.upper() + c.lower())) for a, b, c in [('how', 'kteam', 'EDUCATION'), ('chia', 'sẻ', 'FREE')]]) # bỏ trống optional-predicate ['How--KTEAMeducation', 'Chia--SẺfree'])
+
+#Giới thiệu hàm enumerate
+print("Giới thiệu hàm enumerate")
+student_list = ['Long', 'Trung', 'Giàu', 'Thành']
+for i in student_list:
+    print(i)
+
+'''Nhưng như vậy thì không rõ ràng cho lắm vì danh sách này không hề có số thứ tự. 
+ nghĩ đến việc sử dụng hàm range.
+Đó cũng là một cách, nhưng Python có hỗ trợ cho bạn một hàm hay hơn đó chính là enumerate. 
+Hàm có cú pháp như sau:'''
+#enumerate(iterable[, start])
+'''Nếu start không được gửi vào thì mặc định là 0
+Hàm này là một generator nhờ câu lệnh yield trong hàm. 
+Nó sẽ tạo ra mỗi giá trị là một cặp gồm số thứ tự và giá trị có cấu trúc như sau'''
+#(start + 0, seq[0]), (start + 1, seq[1]), (start + 2, seq[2]), ...
+gen = enumerate(student_list)
+print(type(gen))
+print(list(gen))
+for key,value in enumerate(student_list):
+    print(key, "=>", value)
+#Nếu bạn không thích bắt đầu từ số 0 thì ta cũng có thể thay đổi
+print("bắt đầu từ 1")
+for key, value in enumerate(student_list,1):
+    print(key , "=>", value)
