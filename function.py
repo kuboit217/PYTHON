@@ -99,3 +99,82 @@ def tich(a,*,b,c):
     print(a*b*c)
 tich(3,b=4,c=6)
 
+#Unpacking arguments với *
+print("Unpacking arguments với *")
+
+def kteam(k, t, e, r): 
+    print(k) 
+    print(t, e) 
+    print('end', r)
+'''Bạn thấy đấy! Hàm này gồm 4 parameter và không có default argument. Vậy nên khi gọi hàm này, bạn buộc phải đưa vào 4 argument.
+Nhưng bạn có một vấn đề, 4 argument cần truyền vào khi gọi hàm này lại nằm trong một List
+lst = ['123', 'Kteam', 69.96, 'Henry']
+Chả sao cả, bạn có thể lấy từng phần tử (element) trong list ra một cách dễ dàng, sau đó bạn có thể gọi hàm kteam như thế này'''
+#lst = ['123', 'Kteam', 69.96, 'Henry']
+#kteam(lst[0], lst[1], lst[2], lst[3])
+'''Phức tạp vấn đề lên một chút nào! Sẽ ra sao nếu bạn có 50 parameter và phải gõ hết 50 indexing để truyền vào cho hàm khi gọi nó?
+Lập trình viên lười lắm, họ không làm chuyện đó đâu. Vậy nên, Python cho phép làm điều đó đơn giản chỉ bằng một dấu *'''
+lst = ['123', 'Kteam', 69.96, 'Henry']
+kteam(*lst)
+'''Khi bạn sử dụng *, bạn không chỉ có thể unpack được các List mà bên cạnh đó bạn có thể unpack các container 
+khác như Tuple, Chuỗi, Generator, Set, Dict (chỉ lấy được key).
+Pass argument bằng cách unpacking argument như thế này là đang truyền vào dưới dạng positional argument. 
+Hãy cẩn thận sử dụng kĩ thuật này với những hàm có parameter dạng keyword-only argument.
+>>> def a(*, s, d): ... print(s, d) ... >>> a(*('a', 'b')) Traceback (most recent call last): File "<stdin>", 
+line 1, in <module> TypeError: a() takes 0 positional arguments but 2 were given
+Trong trường hợp container của bạn unpack các giá trị có trong container nhưng vẫn chưa đủ yêu cầu của hàm, thì bạn có thể truyền thêm:'''
+kteam(* ('a', 'b', 'c'), 'd')
+
+#Packing arguments với *
+print('Packing arguments với *')
+'''Khi bạn sử dụng packing argument. Đồng nghĩa với việc bạn nhờ một biến đi gói tất cả 
+các giá trị truyền vào cho hàm bằng positional argument thành một Tuple. Nếu không có 
+gì để gói (bạn không truyền vào bất cứ argument nào) thì bạn sẽ nhận được một tuple rỗng. 
+Để giao nhiệm vụ cho một biến làm công việc này, bạn đặt một dấu * trước nó.'''
+def kteam(*args):
+    print(args)
+    print(type(args)) 
+
+kteam('Kteam', 69.96, 'Henry')
+'''Bạn không nên nhầm lẫn việc này với việc force keyword-only argument Không 
+được phép để 2 parameter cùng làm nhiệm vụ packing argument trong một hàm
+Nếu sau một packing parameter còn có những parameter khác, 
+khi gọi hàm muốn truyền giá trị vào cho các parameter sau packing parameter bạn cần phải sử dụng keyword argument.
+def f(*args, kter): 
+    print(kter) 
+    f('1', '2') 
+Traceback (most recent call last): File "<stdin>", 
+line 1, in <module> TypeError: f() missing 1 required keyword-only argument: 'kter' >>> 
+f('1', '2', kter='3')'''
+
+#Unpacking arguments với **
+print("Unpacking arguments với **")
+dic = {'name': 'Kteam', 'member': 69}
+def kteam(a,b):
+    print(a)
+    print(b)
+kteam(*dic)
+'''Với Dict, thì nó phức tạp hơn một xíu khi mỗi phần tử là một cặp key và value. 
+Vậy nên một dấu * là không đủ nội công để unpack hết được các giá trị. Do đó ta phải nhờ đến một cặp **.
+Nếu bạn unpacking một Dictionary để truyền argument vào cho hàm khi gọi hàm thì đây chính là dạng keyword argument. 
+Vậy nên bạn phải chắc chắn rằng parameter với key là giống nhau.'''
+dic = {'name': 'Kteam', 'member': 69}
+def kteam(name,member):
+    print(name,'=>',name)
+    print(member,'=>',member)
+kteam(**dic)
+
+#Packing arguments với **
+print('Packing arguments với **')
+'''Đã có unpacking với ** thì cũng phải có packing. Khác với dấu * là gói những positional argument thì ** lại gói các keyword argument. 
+Và đương nhiên, nó sẽ gói trong một Dict. Nếu không truyền gì vào sẽ là một dict rỗng.'''
+def kteam(**kwargs):
+    print(kwargs)
+    print(type(kwargs))
+kteam(name="viet", tuoi = 29)
+
+def infor(**kwargs):
+    for key,value in kwargs.items():
+        print(key , "=>", value)
+infor(name = 'Việt', Tuoi = 29)
+'''bạn không được phép bỏ các positional parameter sau biến packing mà có ** giống như với *.'''
