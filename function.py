@@ -178,3 +178,60 @@ def infor(**kwargs):
         print(key , "=>", value)
 infor(name = 'Việt', Tuoi = 29)
 '''bạn không được phép bỏ các positional parameter sau biến packing mà có ** giống như với *.'''
+
+#Bài 31: KIỂU DỮ LIỆU FUNCTION TRONG PYTHON - BIẾN LOCALS VÀ GLOBALS
+print("Bài 31: KIỂU DỮ LIỆU FUNCTION TRONG PYTHON - BIẾN LOCALS VÀ GLOBALS")
+
+#Khai báo biến ở trong hàm
+def make_sologan():
+    viet = "Việt Đinh"
+    print(viet)
+make_sologan()
+'''biến khai báo ở hàm nào thì chỉ hàm đó mới biết biến đó còn thoát ra ngoài hàm đó thì coi như không có. 
+Biến khai báo ở hàm cha có thể sử dụng trong hàm con nhưng biến ở hàm con không thể sử dụng ở hàm cha.
+Lưu ý: Biến là đối tượng nên bị ràng buộc bởi điều này. Do đó các HÀM (FUNCTION), LỚP (CLASS) 
+cũng chịu sự ràng buộc này tương tự. Khai báo ở hàm nào thì chỉ dùng ở hàm đó.'''
+#Thay đổi giá trị argument gián tiếp qua parameter
+print("Thay đổi giá trị argument gián tiếp qua parameter")
+'''pass by reference. Có nghĩa là bạn đưa bản gốc.
+pass by value, đưa giá trị hoặc là “đưa bản sao”.'''
+num = 69 
+st = 'How Kteam' 
+lst = [1, 2, 3] 
+tup = tuple('Education') 
+def change(parameter): 
+    parameter = 'New value' 
+    print('Changed successfully!') 
+change(num) 
+change(st) 
+change(lst) 
+change(tup) 
+print('*' * 10) 
+print('{}\n{}\n{}\n{}\n'.format(num, st, lst, tup))
+
+#Sử dụng lệnh global
+print("Sử dụng lệnh global")
+'''
+Nếu như một biến nằm trong một hàm (như biến kteam trong ví dụ cuối ở phần đầu) thì người ta hay gọi đó là local variable (biến chỉ có hiệu lực trong một hàm nhỏ).
+Đặt vấn đề là việc khai báo biến ở trong hàm trở nên cần thiết thì sao nhỉ?
+Ta được Python hỗ trợ lệnh global.
+global <variable>
+def make_slogan(): 
+    # khởi tạo với global không có giá trị nhé 
+    # global kteam # sau khi khởi tạo xong, ta mới gán giá trị 
+    # kteam = 'How Kteam' 
+    # # nhớ là phải chạy hàm nữa 
+make_slogan() 
+print(kteam)'''
+'''BẠN KHÔNG NÊN SỬ DỤNG GLOBAL trừ khi hết cách. Nó giống như hàm eval vậy. 
+Việc sử dụng biến global làm cho chương trình rối, khó kiểm soát cho nên hạn hãy chế tối đa việc sử dụng.'''
+
+#Giới thiệu hàm locals và globals
+print("Giới thiệu hàm locals và globals")
+'''
+Cái tên hàm nói lên tất cả. Hàm locals cho ta biết được những biến local (những biến được khai báo trong hàm)
+nằm trong chương trình của chúng ta. Còn globals là hàm giúp chúng ta biết được những biến global trong chương trình.
+Kết quả trả ra của hai hàm này là một Dict. Với key là tên biến và value là giá trị của biến.
+Với hàm globals() thì với biến globals có giá trị mới được trả về.'''
+print(locals())
+print(globals())
