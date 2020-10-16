@@ -251,8 +251,18 @@ nên được đưa cho một biến nào đó hứng, nếu không thì coi nh�
 '''
 def cal_rec_per(width,height):
     per = (width + height) * 2
-    return per # treturn per
+    return per # return per
 width_rec = 10
 height_rec = 20
 rec_per = cal_rec_per(width_rec,height_rec) # tạo biến hứng return trong hàm.
 print(rec_per)
+
+#Dùng return để trả về nhiều giá trị một lúc
+print("Dùng return để trả về nhiều giá trị một lúc")
+
+def cal_rec_area_per(width,height):
+    per = (width + height) * 2
+    area = width * height
+    return per,area # treturn per, area
+rec_per,area_per = cal_rec_area_per(19,21) #2 biến hứng kết quả retturn ra từ hàm
+print(rec_per,area_per)
