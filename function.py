@@ -235,3 +235,24 @@ Kết quả trả ra của hai hàm này là một Dict. Với key là tên bi�
 Với hàm globals() thì với biến globals có giá trị mới được trả về.'''
 print(locals())
 print(globals())
+
+#Giới thiệu lệnh return
+print("Giới thiệu lệnh return")
+''''
+Đây là lệnh chỉ sử dụng được ở trong hàm (nếu sử dụng ở ngoài hàm sẽ có nhắc lỗi) 
+SyntaxError: 'return' outside function
+Lệnh return có cú pháp như sau 
+return [object]
+Ở đây, object là một đối tượng bất kì của một lớp nào đó, có thể là số (number),
+chuỗi (string), list, tuple, hàm (sẽ biết rõ hơn khi tìm hiểu decorator), lớp (class) 
+hoặc thậm chí là bỏ trống – trường hợp bỏ trống thì object return về được tính là None.
+Khi return được gọi, hàm được kết thúc và kết quả được trả ra ngoài. Kết quả trả ra ngoài 
+nên được đưa cho một biến nào đó hứng, nếu không thì coi như bạn gọi hàm không để làm gì.
+'''
+def cal_rec_per(width,height):
+    per = (width + height) * 2
+    return per # treturn per
+width_rec = 10
+height_rec = 20
+rec_per = cal_rec_per(width_rec,height_rec) # tạo biến hứng return trong hàm.
+print(rec_per)
