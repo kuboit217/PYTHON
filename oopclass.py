@@ -96,3 +96,117 @@ print(sieu_nhan_A.__dict__)
 print("ten la:",sieu_nhan_A.ten)
 print(sieunhan.xinchao(sieu_nhan_A))
 print(sieu_nhan_A.xinchao())
+
+#Khai báo và sử dụng
+print("Khai báo và sử dụng")
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    suc_manh = 50
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+    def xinchao(self):
+        return "Ta là: " + self.ten
+
+sieu_nhan_A = sieunhan("viet","do",29)
+print(sieu_nhan_A.__dict__)
+print(sieu_nhan_A.suc_manh)
+''' ta đã khai báo một thuộc tính suc_manh ở ngay hẳn trong lớp SieuNhan, 
+và dĩ nhiên thuộc tính này không cần phải khai báo gián tiếp qua hàm constructor.
+
+Lớp SieuNhan dĩ nhiên là có thuộc tính suc_manh = 50. Và vì sieu_nhan_A là một đối tượng thuộc lớp SieuNhan, 
+nên những thuộc tính ở lớp SieuNhan mặc định sẽ được tự động gán cho đối tượng này, vì thế đối tượng này cũng có thuộc tính 
+và cũng như là giá trị như ta khai báo trong “khuôn mẫu”'''
+
+#Cập nhật giá trị thuộc tính thông qua lớp
+print("Cập nhật giá trị thuộc tính thông qua lớp")
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    so_thu_tu = 1
+    suc_manh = 50
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+        self.stt = sieunhan.so_thu_tu
+        sieunhan.so_thu_tu += 1
+        
+    def xinchao(self):
+        return "Ta là: " + self.ten
+
+sieu_nhan_A = sieunhan("viet","do",29)
+print(sieu_nhan_A.__dict__)
+
+sieu_nhan_B = sieunhan("Bool","do",1)
+print(sieu_nhan_B.__dict__)
+
+print(sieu_nhan_A.suc_manh)
+sieunhan.suc_manh = 40
+print(sieu_nhan_A.suc_manh)
+
+print(sieu_nhan_A.stt)
+print(sieu_nhan_B.stt)
+
+'''Thuộc tính so_thu_tu được thay đổi qua mỗi lần tạo đối tượng mới vì mỗi lần tạo đối tượng mới là ta lại gọi hàm constructor,
+ do đó gián tiếp thay đổi giá trị so_thu_tu của lớp.
+
+Ta gán giá trị này cho một thuộc tính của đối tượng đó ngay trong hàm constructor chứ  không để cho lớp giữ.
+ Vì nếu đễ cho lớp giữ thì như bạn đã biết, nó sẽ thay đổi chứ không hề giữ nguyên sau các lần tạo đối tượng mới.'''
+
+ #Cập nhật giá trị thuộc tính thông qua đối tượng
+print("Cập nhật giá trị thuộc tính thông qua đối tượng")
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    so_thu_tu = 1
+    suc_manh = 50
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+        self.stt = sieunhan.so_thu_tu
+        sieunhan.so_thu_tu += 1
+        
+    def xinchao(self):
+        return "Ta là: " + self.ten
+
+sieu_nhan_A = sieunhan("viet","do",29)
+print(sieu_nhan_A.__dict__)
+print(sieu_nhan_A.suc_manh)
+
+
+
+sieu_nhan_B = sieunhan("Bool","do",1)
+print(sieu_nhan_B.__dict__)
+
+sieu_nhan_B.suc_manh = 10
+
+print(sieu_nhan_B.suc_manh)
+
+#Sử dụng thuộc tính trong các phương thức
+print("Sử dụng thuộc tính trong các phương thức")
+'''Và đương nhiên rồi, như đã nói thì khi bạn khai báo thuộc tính của một đối tượng ở ngay trong “khuôn mẫu” 
+luôn thì nó cũng chỉ vẫn là thuộc tính, vì thế bạn vẫn có thể sử dụng nó ở trong các phương thức một cách bình thường 
+như những thuộc tính được khởi tạo ngay trong hàm constructor'''
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+        
+    def xinchao(self):
+        return "Ta là: " + self.ten
+
+sieu_nhan_A = sieunhan("viet","do",29)
+print(sieu_nhan_A.__dict__)
+
+print(sieu_nhan_A.xinchao())
