@@ -210,3 +210,107 @@ sieu_nhan_A = sieunhan("viet","do",29)
 print(sieu_nhan_A.__dict__)
 
 print(sieu_nhan_A.xinchao())
+
+#Các phương thức lớp trong lập trình hướng đối tượng với Python 
+print("Các phương thức lớp trong lập trình hướng đối tượng với Python ")
+'''Thông thường parameter được nhận nhiệm vụ nhân argument đó ta sẽ đặt là self. 
+Những phương thức mà có mặc định parameter self người ta gọi đó là những regular method (phương thức thường).'''
+
+#Class method
+'''Như bạn biết thì khi làm như vậy, thuộc tính ở lớp cũng như tất cả các đối tượng thuộc lớp đó sẽ được cập nhật lại với giá trị mới.
+
+Tuy nhiên, cách này thường không đường sử dụng, mà thay vào đó họ sẽ sử dụng class method. Sử dụng làm sao thì mời bạn đọc đến với ví dụ sau:'''
+
+print("Class method")
+
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    suc_manh = 50
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+
+    @classmethod   
+    def cap_nhat_suc_manh(cls,smanh):
+        cls.suc_manh = smanh
+
+    def xinchao(self):
+        return "Ta là: " + self.ten
+
+sieu_nhan_A = sieunhan("viet","do",29)
+print(sieu_nhan_A.__dict__)
+
+print(sieu_nhan_A.suc_manh)
+
+sieu_nhan_A.cap_nhat_suc_manh(10)
+
+print(sieu_nhan_A.suc_manh)
+
+print(sieu_nhan_A.xinchao())
+
+'''Để Python biết được phương thức nào là class method thì bạn thên @classmethod ngay trên dòng khai báo hàm. 
+Và như đã nói, mặc định sẽ luôn có một argument được gửi vào đó chính là lớp gọi phương thức đó.
+
+Và dĩ nhiên cũng có thể là lớp của đối tượng gọi phương thức đó
+Tuy nhiên, đây không phải là ứng dụng chính của class method. Class method thường được dùng để tạo đối tượng.
+
+Đặt vấn đề, ta muốn khởi tạo một siêu nhân, tuy nhiên một số siêu nhân lại có các thông tin không được tường minh 
+rõ ràng mà lại được lưu dưới dạng một list, hay một chuỗi ta có thể xử lí để lấy các thông tin. Và như vậy, 
+bạn thấy rằng ta cần phải có một bước tiền xử lí trước khi ra được các thông tin của một siêu nhân sau đó mới tạo được đối tượng
+
+Giả sử ta phải xử lí các thông tin của siêu nhân là một chuỗi. Các thông tin được nối với nhau bằng một kí tư “-“.'''
+
+class sieunhan():
+    """
+    class siêu nhân
+    """    
+    suc_manh = 50
+    def __init__(self,ten,mausac,tuoi):
+        self.ten = ten
+        self.mausac = mausac
+        self.tuoi = tuoi
+    @classmethod
+    def from_string(cls,s):
+        str = s.split("-")
+        new_str = [st.strip() for st in str]
+        ten,mausac,tuoi = new_str
+        return cls(ten,mausac,tuoi)
+str = "Viet - Dinh - Lang"
+sieu_nhan_A = sieunhan.from_string(str)
+print(sieu_nhan_A.__dict__)
+'''đối tượng sieu_nhan_A giờ đây không còn được khởi tạo theo cách thông thường mà giờ đây lớp SieuNhan qua một bức xử lí các thông tin, 
+sau đó khởi tạo một đói tượng ngay trong phương thức, rồi mới trả về lại cho sieu_nhan_A.
+'''
+
+#Static method
+print("Static method")
+'''Regular method được ngầm gửi vào argument là chính đối tượng gọi phương thức và ta sử dụng parameter self để xử lí những vấn đề khác, 
+class method được ngầm gửi vào argument là chính class gọi phương thức và ta sử dụng parameter cls để xử lí những vấn đề 
+khác thì static method chẳng ngầm gửi cái gì vào cả, nó như một hàm bình thường.
+
+Câu hỏi ở đây là, ta chẳng cần tạo static method mà tạo luôn hàm ở ngoài lớp được không? Chẳng vấn đề gì. 
+Tuy nhiên static method vẫn tồn tại vì đôi lúc ta cần sự khoa học, logic, một số phương thức chẳng có sử dụng tí
+ gì tới những thông tin của đối tượng thuộc lớp đó tuy nhiên nó vẫn có gì đó liên quan nên vẫn được đặt ở trong lớp đó.'''
+
+class vietdinh():
+    def __init__(self,ten,tuoi):
+        self.ten = ten
+        self.tuoi = tuoi
+    
+    @staticmethod
+    def chao():
+        print(" 1 2 3 xin chào")
+
+viet_dinh = vietdinh("Việt", 30)
+print(viet_dinh.__dict__)
+print(viet_dinh.chao())
+
+'''Nếu bạn vẫn phân vân khi nào dùng regular method, class method, static method thì bạn chỉ cần nhớ thế này:
+
+    Nếu bạn dựng một phương thức cần sử dụng đối tượng đó thì dùng regular method
+    Nếu bạn cần dùng class thì dùng class method
+    Trường hợp còn lại (tức là không dùng gì) thì dùng static method
+'''
