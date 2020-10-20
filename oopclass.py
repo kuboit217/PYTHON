@@ -314,3 +314,113 @@ print(viet_dinh.chao())
     Nếu bạn cần dùng class thì dùng class method
     Trường hợp còn lại (tức là không dùng gì) thì dùng static method
 '''
+#Tạo lớp kế thừa trong lập trình hướng đối tượng với Python 
+print("Tạo lớp kế thừa trong lập trình hướng đối tượng với Python ")
+
+#Tạo lớp kế thừa
+print("Tạo lớp kế thừa")
+
+class vietdinh():
+    pass
+class kubool(vietdinh):
+    pass
+boolkun = kubool()
+print(boolkun)
+
+#Kế thừa thuộc tính
+print("Kế thừa thuộc tính")
+
+print("Tạo lớp kế thừa")
+
+class vietdinh():
+    suc_manh = 50
+class kubool(vietdinh):
+    pass
+boolkun = kubool()
+print("sức mạnh của thằng bool là:",boolkun.suc_manh)
+
+#Giả sử như bạn không muốn thừa hưởng giá trị từ lớp ta kế thừa thì phải làm sao? Đơn giản mà, ta viết lại thôi
+print("Kế thừa thuộc tính")
+
+print("Tạo lớp kế thừa")
+
+class vietdinh():
+    suc_manh = 50
+class kubool(vietdinh):
+    suc_manh = 100
+boolkun = kubool()
+print("sức mạnh của thằng bool là:",boolkun.suc_manh)
+
+#Kế thừa hàm constructor
+print("Kế thừa hàm constructor")
+'''Ta vừa mới thử thừa kế các thuộc tính ở lớp ta thừa kế (lớp cha), giờ ta thử thừa kế hàm constructor. 
+Nếu lớp bạn thừa kế có hàm constructor thì khi bạn thừa kế lớp đó bạn nghiễm nhiên đã có một hàm constructor, và dùng như dùng ở lớp kế thừa. Mời bạn đọc xem ví dụ:'''
+class vietdinh():
+    suc_manh = 50
+    def __init__(self,ten,tuoi):
+        self.ten = ten
+        self.tuoi = tuoi
+
+class kubool(vietdinh):
+    suc_manh = 100
+boolkun = kubool("Bool",1)
+print(boolkun.__dict__)
+
+'''Vậy câu hỏi đặt ra là ta muốn thêm một số thuộc tính nữa cho lớp siêu nhân gao thì sao? 
+Giả sử ta cũng muốn thêm một thuộc tính nữa là sư thú mà siêu nhân gao đó có khi khởi tạo. Và muốn thay đổi thì ta viết lại thôi.'''
+class vietdinh():
+    suc_manh = 50
+    def __init__(self,ten,tuoi):
+        self.ten = ten
+        self.tuoi = tuoi
+
+class kubool(vietdinh):
+    suc_manh = 100
+    def __init__(self,ten,tuoi,noisinh):
+        self.ten = ten
+        self.tuoi = tuoi
+        self.noisinh = noisinh
+
+boolkun = kubool("Bool",1,"Phú Yên")
+print(boolkun.__dict__)
+
+'''Tại sao ta phải ghi lại gần như là hết cả hàm constructor như lớp cha. Có cách nào nhanh gọn giúp ta đỡ việc copy 
+paste lại phương thức từ hàm constructor lớp cha mà chỉ cần thêm những thuộc tính mới thôi không? Có đấy. 
+Ví dụ sau đây sẽ dùng phương pháp đó và đây là cách người ta hay dùng chứ không phải cách bên trên.'''
+
+class vietdinh():
+    suc_manh = 50
+    def __init__(self,ten,tuoi):
+        self.ten = ten
+        self.tuoi = tuoi
+
+class kubool(vietdinh):
+    suc_manh = 100
+    def __init__(self,ten,tuoi,noisinh):
+        super().__init__(ten,tuoi)
+        self.noisinh = noisinh
+
+boolkun = kubool("Bool",1,"Phú Yên")
+print(boolkun.__dict__)
+
+#Kế thừa phương thức
+print("Kế thừa phương thức")
+
+class vietdinh():
+    suc_manh = 50
+    def __init__(self,ten,tuoi):
+        self.ten = ten
+        self.tuoi = tuoi
+
+    def xinchao(self):
+        print("xin chào: "+self.ten)
+
+class kubool(vietdinh):
+    suc_manh = 100
+    def __init__(self,ten,tuoi,noisinh):
+        super().__init__(ten,tuoi)
+        self.noisinh = noisinh
+
+boolkun = kubool("Bool",1,"Phú Yên")
+print(boolkun.__dict__)
+boolkun.xinchao()
