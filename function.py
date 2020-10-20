@@ -235,3 +235,121 @@ Kết quả trả ra của hai hàm này là một Dict. Với key là tên bi�
 Với hàm globals() thì với biến globals có giá trị mới được trả về.'''
 print(locals())
 print(globals())
+
+#Giới thiệu lệnh return
+print("Giới thiệu lệnh return")
+''''
+Đây là lệnh chỉ sử dụng được ở trong hàm (nếu sử dụng ở ngoài hàm sẽ có nhắc lỗi) 
+SyntaxError: 'return' outside function
+Lệnh return có cú pháp như sau 
+return [object]
+Ở đây, object là một đối tượng bất kì của một lớp nào đó, có thể là số (number),
+chuỗi (string), list, tuple, hàm (sẽ biết rõ hơn khi tìm hiểu decorator), lớp (class) 
+hoặc thậm chí là bỏ trống – trường hợp bỏ trống thì object return về được tính là None.
+Khi return được gọi, hàm được kết thúc và kết quả được trả ra ngoài. Kết quả trả ra ngoài 
+nên được đưa cho một biến nào đó hứng, nếu không thì coi như bạn gọi hàm không để làm gì.
+'''
+def cal_rec_per(width,height):
+    per = (width + height) * 2
+    return per # return per
+width_rec = 10
+height_rec = 20
+rec_per = cal_rec_per(width_rec,height_rec) # tạo biến hứng return trong hàm.
+print(rec_per)
+
+#Dùng return để trả về nhiều giá trị một lúc
+print("Dùng return để trả về nhiều giá trị một lúc")
+
+def cal_rec_area_per(width,height):
+    per = (width + height) * 2
+    area = width * height
+    return per,area # treturn per, area
+rec_per,area_per = cal_rec_area_per(19,21) #2 biến hứng kết quả retturn ra từ hàm
+print(rec_per,area_per)
+
+#Giới thiệu generator
+print("Giới thiệu generator")
+'''Generator là iterator, một dạng của iterable nhưng khác ở chỗ bạn không thể tái sử dụng. 
+Vì sao lại như vậy? Generator không lưu trữ tất cả các giá trị của bạn ở bộ nhớ,
+ mà nó sinh ra lần lượt'''
+kteam_gen = (i for i in range(3))
+for value in kteam_gen:
+    print(value)
+for value in kteam_gen:
+    print(value)
+'''
+Bạn thấy đấy, không có giá trị nào được in ra. Bởi vì khi nó sinh ra giá trị đầu tiên là 0,
+khi bạn kêu nó sinh tiếp giá trị 1, nó sẽ vứt bỏ giá trị 0 để nhường chỗ cho giá trị 1, 
+và nếu bạn tiếp tục yêu cầu sinh thêm giá trị nó sẽ lại tiếp tục công việc như cũ cho tới khi kết thúc.'''
+
+#Lệnh yield
+print("Lệnh yield")
+'''Lệnh này cách sử dụng gần giống với lệnh return, tuy nhiên nó khác
+return ở chỗ trả về một object thì yield sẽ trả về một generator'''
+#khi sử dụng retturn
+def square(lst):
+    sq_lst=[]
+    for num in lst:
+        sq_lst.append(num ** 2)
+    return sq_lst
+print(square([1,2,3]))
+#khi sử dụng yield
+def square_yield(lst):
+    for num in lst:
+        yield (num **2)
+viet = square_yield([1,2,3])
+for value in viet:
+    print(value)
+
+#Phương thức send
+print("Phương thức send")
+#generator.send(value)
+def gen():
+    for i in range(4):
+        x = yield i
+        print('value from ',x)
+g = gen()
+print(next(g))
+print(g.send("viet"))
+#Vì sao nên dùng yield
+'''
+Tốc độ, khi sử dụng generator, để duyệt các giá trị thì generator sẽ nhanh hơn khi khi bạn duyệt một iterable lưu trữ một lúc tất cả các giá trị
+Bộ nhớ, bạn sẽ phải cân nhắc việc dùng yield khi bạn làm việc với những tập dữ liệu lớn. Lúc đó, bạn sẽ phải xem xét lại xem liệu bạn có cần giữ tất cả các giá trị một lúc không hay chỉ cần sinh ra từng giá trị một để tiết kiệm bộ nhớ.
+Còn một số ưu điểm nữa của yield, bạn đọc có thể tham khảo câu trả lời sau trên Stack Overflow:'''
+
+#lambda
+print("lambda")
+'''
+Ngoài từ khóa “def”, Python cũng hỗ trợ cho bạn một cách khác để có thể khai báo một function object,
+ đó chính là lambda. Nó chỉ khác từ khóa “def” ở chỗ, thay vì def tạo một hàm với một cái tên xác định
+ thì lambda trả về một hàm. Thế nên người ta hay gọi lambda là hàm nặc danh (anonymous). 
+ Nó thường được sử dụng thường xuyên để có thể tạo ra một hàm chỉ với một dòng lệnh.
+ lambda argument_1, argument_2, …, argument_n : expression
+ Như đã nói ở trên, lambda hoạt động như khi bạn dùng từ khóa “def” khai báo hàm. 
+ Tuy nhiên, vẫn có một vài ưu điểm nổi trội của lambda so với cách bình thường:
+ lambda là một expression, không phải là một câu lệnh. 
+(Khái niệm expression đã được Kteam giới thiệu). Do đó lambda có thể có ở một vài chỗ mà “def” 
+không thể có (bạn đọc sẽ biết ở phần sau)
+ lambda là một dòng expression duy nhất, không phải là một khối lệnh. Phần expression
+ của lambda giống với phần khối lệnh của hàm với một lệnh return ở cuối hàm nhưng với lambda
+  bạn chỉ cần ghi giá trị mà không cần ghi return. Bạn đọc sẽ hiểu rõ hơn ở phần sau khi biết 
+  lambda có thể sử dụng các câu lệnh điều kiện mà không cần phải sử dụng tới lệnh “if”. 
+  Nhờ được thiết kế như vậy, lambda được ưu tiên dùng cho việc tạo ra những hàm đơn giản, còn nếu 
+  phức tạp thì ta sẽ sử dụng đến từ khóa “def”.'''
+#Đây là khi bạn sử dụng từ khóa “def”
+def ave(a,b,c):
+    print((a+b+c) / 2)
+print(ave(1,2,3))
+
+#khi bạn dùng lambda 
+ave_la = lambda a,b,c: (a+b+c)/2
+print(ave_la(1,2,3))
+#default argument cũng có thể sử dụng trong lambda
+
+#Vì sao dùng lambda?
+'''
+Chung quy thì lambda là một công cụ nhanh gọn để bạn có thể tạo ra một hàm và sử dụng nó. 
+Việc sử dụng nó thay cho “def” hay không là tùy ở bạn. Đương nhiên là bạn có thể chỉ sử dụng “def” 
+thôi cũng được, hoàn toàn được, đặc biệt là những lúc mà hàm của bạn phức tạp, cần nhiều câu lệnh 
+thì bạn không cần phải suy nghĩ nhiều nữa mà nên dùng “def” luôn. Nhưng giả sử bạn chỉ cần khởi tạo 
+một hàm cấu trúc đơn giản và tái sử dụng nhiều lần thì sao? Lúc đó hãy nghĩ tới lambda nhé!'''
