@@ -424,3 +424,161 @@ class kubool(vietdinh):
 boolkun = kubool("Bool",1,"Phú Yên")
 print(boolkun.__dict__)
 boolkun.xinchao()
+
+#Giới thiệu chung về phương thức đặc biệt
+print("Giới thiệu chung về phương thức đặc biệt")
+
+'''Phương thức đặc biệt, tiếng Anh là Special method, đôi lúc người ta còn gọi là Magic method hoặc Dunder method. 
+Những phương thức này đã được quy ước sẵn tên. Định dạng chung của các phức thức này là __tên phương thức __. 
+Và chúng ta đã tìm hiểu một special method rồi đấy. Nếu bạn đọc chưa nhớ ra thì đó chính là hàm constructor của chúng ta. Nó cũng là một special method.
+
+Có rất nhiều special method, mỗi special method lại có một công dụng khác nhau, việc chúng ta là dựa theo khuôn mẫu đó để viết theo ý chúng ta. 
+Nếu bạn đọc còn chưa mường tượng được vấn đề thì không sao cả. Chúng ta sẽ đến với một số ví dụ để hiểu hơn'''
+#Giới thiệu một số phương thức đặc biệt
+print("Giới thiệu một số phương thức đặc biệt")
+
+class SieuNhan:
+    suc_manh = 50
+    def __init__(self, para_ten, para_vu_khi, para_mau_sac):
+        self.ten = para_ten
+        self.vu_khi = para_vu_khi
+        self.mau_sac = para_mau_sac
+
+    def __str__(self):
+        return 'Day la {}, su dung {}'.format(self.ten, self.vu_khi)
+    def __repr__(self):
+        return 'ten: {}\nvu khi: {}\nmau sac: {}'.format(self.ten, self.vu_khi, self.mau_sac)
+    def __len__(self):
+        return len(self.ten)
+
+SN_A = SieuNhan('Sieu nhan Do', 'Kiem', 'Do')
+
+# Nếu bạn muốn khi in ra mà ta có một miêu tả rõ ràng về thứ này là gì, thì ta sẽ nên sử dụng hàm __str__. 
+# Bạn đọc xem ví dụ sau đây, ta sẽ viết thêm cho lớp một phương thức nữa:
+print(SN_A.__str__()) 
+
+# Phương thức __str__ này còn có một anh em họ nữa là phương thức __repr__
+
+print(SN_A.__repr__)
+'''Tuy nhiên các bạn lưu ý dùm mình, khi dùng hàm print. Nếu như lớp của bạn cùng có cả 2 phương thức __str__ và __repr__ 
+thì hàm print ưu tiên dùng __str__ hơn. Còn trên interactive prompt khi không dùng hàm print thì sẽ ưu tiên __repr__ hơn. 
+Tuy nhiên ta vẫn có cách để gọi __repr__ nếu cần (ngoài cách gọi trực tiếp đối tượng.__repr__()). Vì mục đích của __repr__ cho thông tin chi tiết cụ thể về đối tượng, 
+còn __str__ chỉ đơn giản là giá trị. Ta nghĩ đơn giản như ta là một đối tượng, mỗi khi ta gọi hàm __str__ 
+thì nó sẽ trả về hình ảnh bề da thịt của cơ thể chúng ta, còn nếu gọi __repr__ thì trả về hình ảnh xương cốt, gân, cơ bắp của cơ thể chúng ta.'''
+
+print(SN_A)
+print('%s' %SN_A)
+print('%r' %SN_A)
+
+#Bạn còn nhớ hàm len chứ? Bản chất hàm len cũng là một special method
+s = 'How Kteam'
+print(len(s))
+print(s.__len__())
+
+#Setters, Getters và Deleters 
+print("Setters, Getters và Deleters ")
+
+#Getter
+print("Getter")
+
+class kter():
+    def __init__(self,ten,ho):
+        self.ten = ten
+        self.ho = ho       
+    
+    @property
+    def ho_ten(self):
+        return "{} {}".format(self.ten,self.ho)
+    @property
+    def emails(self):
+        return self.ho + "." + self.ten + "@vietdinh.com"
+
+kter_A = kter("Viet", "Dinh")
+
+print(kter_A.ho)
+print(kter_A.ten)
+print(kter_A.emails)
+print(kter_A.ho_ten)
+# Giờ là lúc mà ta nghịch ngợm một tí, bằng cách trước khi in ra những thông tin, ta thử tay đổi họ và tên của đối tượng kter ta vừa tạo.
+kter_A.ho = "Nguyen"
+kter_A.ten = "Giau"
+
+print(kter_A.ho)
+print(kter_A.ten)
+print(kter_A.emails)
+print(kter_A.ho_ten)
+
+#Setter
+print("Setter")
+#Nãy ta có một thuộc tính ho_ten sau khi sử dụng getter. Vậy giả sử ta muốn gán lại ho_ten thì chuyện gì xảy ra?
+''' Và kết quả là có lỗi vì nó mâu thuẫn với thuộc tính ho_va_ten của chúng ta. 
+Vì sao mâu thuẫn? Bản chất ho_va_ten là một phương thức, không thể gán cho một giá trị ngang như vậy được. 
+Vì lí do đó, setter đã được sinh ra, chúng ta hãy thêm phương thức này vào lớp:'''
+
+class kter():
+    def __init__(self,ten,ho):
+        self.ten = ten
+        self.ho = ho       
+    
+    @property
+    def email(self):
+        return self.ho + "." + self.ten + "@vietdinh.com"
+
+    @property
+    def ho_ten(self):
+        return "{} {}".format(self.ten,self.ho)
+
+    @ho_ten.setter
+    def ho_ten(self,name_moi):
+        ho_moi,ten_moi = name_moi.split(' ')
+        self.ho = ho_moi
+        self.ten = ten_moi
+
+kter_A = kter("Viet", "Dinh")
+
+kter_A.ho_ten = "Nguyen Giau" # day la argument cho parameter ten_moi
+
+print(kter_A.ho_ten)
+
+#Deleter
+'''Nếu bạn muốn dùng xong xóa, thì deleter là công cụ giúp bạn xóa những thuộc tính bạn vừa gán. 
+..Xóa ở đây là việc gán một giá trị rác (giá trị không có ý nghĩa) cho cái chúng ta muốn xóa. 
+Và thường trong Python giá trị đó được sử dụng là None (đôi lúc là 0, hoặc là một list rỗng, tùy từng thuộc tính mà ta muốn xóa)
+
+Cú pháp gần như tương tự với setter (deleter không sử dụng parameter nào khác ngoài parameter self). Ta thêm một deleter vào một lớp và sử dụng deleter như sau.'''
+
+class kter():
+    def __init__(self,ten,ho):
+        self.ten = ten
+        self.ho = ho       
+    
+    @property
+    def email(self):
+        return self.ho + "." + self.ten + "@vietdinh.com"
+
+    @property
+    def ho_ten(self):
+        return "{} {}".format(self.ten,self.ho)
+
+    @ho_ten.setter
+    def ho_ten(self,name_moi):
+        ho_moi,ten_moi = name_moi.split(' ')
+        self.ho = ho_moi
+        self.ten = ten_moi
+
+    @ho_ten.deleter
+    def ho_ten(self):
+        self.ten = None
+        self.ho = None
+        print("Đã Xóa")
+
+kter_A = kter("Viet", "Dinh")
+
+kter_A.ho_ten = "Nguyen Giau" # day la argument cho parameter ten_moi
+
+print(kter_A.ho_ten)
+
+del kter_A.ho_ten
+
+print(kter_A.ho)
+print(kter_A.ten)
